@@ -4,10 +4,11 @@ import { FormEventHandler } from 'react';
 
 import AuthLayout from '@/layouts/auth-layout';
 
-import { Label } from '@/components/Label';
-import { InputDefault } from '@/components/InputDefault';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import TextLink from '@/components/TextLink';
-import { Button } from '@/components/Button';
+import InputError from '@/components/InputError';
 
 type RegisterForm = {
     name: string;
@@ -38,7 +39,7 @@ export default function RegisterClient() {
                 <div className="grid gap-6">
                     <div className="grid gap-2">
                         <Label htmlFor="name">Name</Label>
-                        <InputDefault
+                        <Input
                             id="name"
                             type="text"
                             required
@@ -50,12 +51,12 @@ export default function RegisterClient() {
                             disabled={processing}
                             placeholder="Full name"
                         />
-                        {errors.name && (<p className='text-sm text-red-600 dark:text-red-400'>{errors.name}</p>)}
+                        <InputError message={errors.name} />
                     </div>
 
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email address</Label>
-                        <InputDefault
+                        <Input
                             id="email"
                             type="email"
                             required
@@ -66,12 +67,12 @@ export default function RegisterClient() {
                             disabled={processing}
                             placeholder="email@example.com"
                         />
-                        {errors.email && (<p className='text-sm text-red-600 dark:text-red-400'>{errors.email}</p>)}
+                        <InputError message={errors.email} />
                     </div>
 
                     <div className="grid gap-2">
                         <Label htmlFor="password">Password</Label>
-                        <InputDefault
+                        <Input
                             id="password"
                             type="password"
                             required
@@ -82,12 +83,12 @@ export default function RegisterClient() {
                             disabled={processing}
                             placeholder="Password"
                         />
-                        {errors.password && (<p className='text-sm text-red-600 dark:text-red-400'>{errors.password}</p>)}
+                        <InputError message={errors.password} />
                     </div>
 
                     <div className="grid gap-2">
                         <Label htmlFor="password_confirmation">Confirm password</Label>
-                        <InputDefault
+                        <Input
                             id="password_confirmation"
                             type="password"
                             required
@@ -98,7 +99,7 @@ export default function RegisterClient() {
                             disabled={processing}
                             placeholder="Confirm password"
                         />
-                        {errors.password_confirmation && (<p className='text-sm text-red-600 dark:text-red-400'>{errors.password_confirmation}</p>)}
+                        <InputError message={errors.password_confirmation} />
                     </div>
 
                     <Button 

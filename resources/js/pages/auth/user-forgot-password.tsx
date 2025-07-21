@@ -1,12 +1,13 @@
 import { Head, useForm } from '@inertiajs/react';
-import { LoaderCircle } from 'lucide-react';
 
 import AuthLayout from '@/layouts/auth-layout';
-
-import { Label } from '@/components/Label';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import TextLink from '@/components/TextLink';
-import { InputDefault } from '@/components/InputDefault';
-import { Button } from '@/components/Button';
+import InputError from '@/components/InputError';
+
+import { LoaderCircle } from 'lucide-react';
 
 export default function UserForgotPassword({ status }: { status?: string }) {
     const { data, setData, post, processing, errors } = useForm<Required<{ email: string }>>({
@@ -29,7 +30,7 @@ export default function UserForgotPassword({ status }: { status?: string }) {
                 <form onSubmit={submit}>
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email address</Label>
-                        <InputDefault
+                        <Input
                             id="email"
                             type="email"
                             name="email"
@@ -39,9 +40,7 @@ export default function UserForgotPassword({ status }: { status?: string }) {
                             onChange={(e) => setData('email', e.target.value)}
                             placeholder="email@example.com"
                         />
-                        { errors.email && (
-                            <p className='text-sm text-red-600 dark:text-red-400'>{errors.email}</p>
-                        )}
+                       <InputError message={errors.email} />
                     </div>
 
                     <div className="my-6 flex items-center justify-start">

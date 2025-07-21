@@ -1,14 +1,15 @@
 import React from 'react';
 import { Head, useForm } from '@inertiajs/react';
-import { LoaderCircle } from "lucide-react";
 
 import AuthLayout from '@/layouts/auth-layout';
-
-import { Button } from '@/components/Button';
-import { InputDefault } from '@/components/InputDefault';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import TextLink from '@/components/TextLink';
-import { Label } from '@/components/Label';
-import { Checkbox } from '@/components/Checkbox';
+import InputError from '@/components/InputError';
+
+import { LoaderCircle } from "lucide-react";
 
 // Define a interface para os dados do formulário de login do usuário
 interface UserLoginFormInputs {
@@ -38,13 +39,13 @@ function UserLogin({ canResetPassword } : LoginProps) {
     };
 
     return (
-        <AuthLayout title="titulo da pagina auth usuario" description='Descrição da pagina Auth usuário'> 
+        <AuthLayout title="Log in to your account" description='Enter your email and password below to log in'> 
             <Head title="Login do Usuário" />
             <form className="flex flex-col" onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email address</Label>
-                        <InputDefault
+                        <Input
                             id="email"
                             type="email"
                             required
@@ -55,33 +56,29 @@ function UserLogin({ canResetPassword } : LoginProps) {
                             onChange={(e) => setData('email', e.target.value)}
                             placeholder="email@example.com"
                         />
-                        { errors.email && (
-                            <p className='text-sm text-red-600 dark:text-red-400'>{errors.email}</p>
-                        )}
+                        <InputError message={errors.email} />
                     </div>
 
                     <div className="grid gap-2">
                         <div className="flex items-center">
                             <Label htmlFor="password">Password</Label>
                             {canResetPassword && (
-                                <TextLink href={route('password.request')} tabIndex={2}>
+                                <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
                                     Esqueceu sua senha?
                                 </TextLink>
                             )}
                         </div>
-                        <InputDefault
+                        <Input
                             id="password"
                             type="password"
                             required
-                            tabIndex={3}
+                            tabIndex={2}
                             autoComplete="current-password"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
                             placeholder="Password"
                         />
-                        {errors.password && (
-                            <p className='text-sm text-red-600 dark:text-red-400'>{errors.password}</p>
-                        )}
+                        <InputError message={errors.password} />
                     </div>
 
                     <div className="flex items-center space-x-3">
@@ -90,7 +87,7 @@ function UserLogin({ canResetPassword } : LoginProps) {
                             name="remember"
                             checked={data.remember}
                             onClick={() => setData('remember', !data.remember)}
-                            tabIndex={4}
+                            tabIndex={3}
                         />
                         <Label htmlFor="remember">Lembre de mim</Label>
                     </div>
@@ -98,7 +95,7 @@ function UserLogin({ canResetPassword } : LoginProps) {
                     <Button
                         type="submit" 
                         className="mt-4 w-full" 
-                        tabIndex={5}  
+                        tabIndex={4}  
                         disabled={processing}
                     >
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
@@ -107,7 +104,7 @@ function UserLogin({ canResetPassword } : LoginProps) {
 
                     <div className="text-center text-sm text-muted-foreground">
                         Não tem uma conta?{' '}
-                        <TextLink href={route('register')} tabIndex={6}>
+                        <TextLink href={route('register')} tabIndex={5}>
                             Inscreva-se
                         </TextLink>
                     </div>
