@@ -5,7 +5,7 @@ import { FormEventHandler } from 'react';
 
 import AuthLayout from '@/layouts/auth-layout';
 
-import { Button } from '@/components/Button';
+import { Button } from '@/components/ui/button';
 import TextLink from '@/components/TextLink';
 
 export default function AdminVerifyEmail({ status }: { status?: string }) {

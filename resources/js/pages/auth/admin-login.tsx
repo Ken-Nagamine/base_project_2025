@@ -3,12 +3,12 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from "lucide-react";
 
 import AuthLayout from '@/layouts/auth-layout';
-
-import { Button } from '@/components/Button';
-import { InputDefault } from '@/components/InputDefault';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import TextLink from '@/components/TextLink';
-import { Label } from '@/components/Label';
-import { Checkbox } from '@/components/Checkbox';
+import InputError from '@/components/InputError';
 
 // Define a interface para os dados do formulário de login do administrador
 interface AdminLoginFormInputs {
@@ -44,7 +44,7 @@ function AdminLogin({ canResetPassword }: LoginProps) {
                 <div className="grid gap-6">
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email address</Label>
-                        <InputDefault
+                        <Input
                             id="email"
                             type="email"
                             required
@@ -55,9 +55,7 @@ function AdminLogin({ canResetPassword }: LoginProps) {
                             onChange={(e) => setData('email', e.target.value)}
                             placeholder="email@example.com"
                         />
-                        { errors.email && (
-                            <p className='text-sm text-red-600 dark:text-red-400'>{errors.email}</p>
-                        )}
+                        <InputError message={errors.email} />
                     </div>
 
                     <div className="grid gap-2">
@@ -69,7 +67,7 @@ function AdminLogin({ canResetPassword }: LoginProps) {
                                 </TextLink>
                             )}
                         </div>
-                        <InputDefault
+                        <Input
                             id="password"
                             type="password"
                             required
@@ -79,9 +77,7 @@ function AdminLogin({ canResetPassword }: LoginProps) {
                             onChange={(e) => setData('password', e.target.value)}
                             placeholder="Password"
                         />
-                        {errors.password && (
-                            <p className='text-sm text-red-600 dark:text-red-400'>{errors.password}</p>
-                        )}
+                        <InputError message={errors.password} />
                     </div>
 
                     <div className="flex items-center space-x-3">

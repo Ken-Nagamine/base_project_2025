@@ -45,7 +45,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth:web')->group(function () { // ['auth:web', 'verified'] para validar email
     Route::get('/dashboard', function () {
-        return Inertia::render('client/client-dashboard', [
+        return Inertia::render('user/user-dashboard', [
             'user' => auth()->guard('web')->user(), // Passa o usuário logado para o frontend
         ]);
     })->name('user.dashboard'); // Rota protegida para usuários
