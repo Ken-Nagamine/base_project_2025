@@ -1,78 +1,27 @@
-import { ReactNode, useState, type PropsWithChildren } from 'react';
-import { usePage, Link, router } from '@inertiajs/react';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { useInitials } from '@/hooks/use-initials';
-import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
+import { ReactNode, type PropsWithChildren } from 'react';
+import { usePage} from '@inertiajs/react';
 
-import { BreadcrumbItem, SharedData, NavItem } from '@/types';
+import { BreadcrumbItem, SharedData } from '@/types';
 import { 
     SidebarProvider, 
-    Sidebar, 
-    SidebarContent, 
-    SidebarHeader, 
-    SidebarFooter,
-    SidebarMenu, 
-    SidebarMenuButton, 
-    SidebarMenuItem,
-    SidebarGroup,
-    SidebarGroupLabel,
     SidebarInset,
     SidebarTrigger
 } from '@/components/ui/sidebar';
-import { 
-    DropdownMenuRoot, 
-    DropdownMenuContent, 
-    DropdownMenuTrigger,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuGroup,
-    DropdownMenuItem, 
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { 
-    BookOpen, 
-    Folder, 
-    LayoutGrid, 
-    ChevronsUpDown,
-    LogOut, 
-    Settings,
-    ChevronRightIcon
-} from 'lucide-react';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import './layout.css'
 import AdminSidebar from './admin-sidebar';
 import AvatarDropdown from '@/components/AvatarDropdown';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-    },
-];
-
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Repository',
-        href: '#',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: '#',
-        icon: BookOpen,
-    },
-];
-
 interface SystemLayoutProps {
-    children: ReactNode
+    children: ReactNode,
+    breadcrumbs: BreadcrumbItem[]
 }
 
-export default function AdminSystemLayout({ children }: PropsWithChildren<SystemLayoutProps>) {
+/* 
+* Os dados do usuario logado é passado no componente AvatarDropdown
+*/
+
+export default function AdminSystemLayout({ children, breadcrumbs }: PropsWithChildren<SystemLayoutProps>) {
     const isOpen = usePage<SharedData>().props.sidebarOpen;
 
     return (

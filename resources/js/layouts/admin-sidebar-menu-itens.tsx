@@ -17,8 +17,7 @@ import {
     DropdownMenuItem, 
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { 
-    BookOpen, 
+import {  
     Folder, 
     LayoutGrid, 
     LogOut, 
@@ -26,21 +25,17 @@ import {
     ChevronRightIcon
 } from 'lucide-react';
 
+// lista de itens ****
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard 2',
-        href: '/dashboard',
+        title: 'Banners',
+        href: '/admin/banners',
         icon: LayoutGrid,
     },
     {
-        title: 'Repository 33',
-        href: '#',
+        title: 'Category',
+        href: '/admin/categories',
         icon: Folder,
-    },
-    {
-        title: 'Documentation 1',
-        href: '#',
-        icon: BookOpen,
     },
 ];
 
