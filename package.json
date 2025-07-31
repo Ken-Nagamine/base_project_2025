@@ -25,10 +25,13 @@
     "dependencies": {
         "@headlessui/react": "^2.2.0",
         "@inertiajs/react": "^2.0.0",
+        "@radix-ui/react-alert-dialog": "^1.1.14",
         "@radix-ui/react-dialog": "^1.1.14",
+        "@radix-ui/react-slot": "^1.2.3",
         "@radix-ui/react-tooltip": "^1.2.7",
         "@radix-ui/themes": "^3.2.1",
         "@tailwindcss/vite": "^4.0.6",
+        "@tanstack/react-table": "^8.21.3",
         "@types/react": "^19.0.3",
         "@types/react-dom": "^19.0.2",
         "@vitejs/plugin-react": "^4.3.4",
