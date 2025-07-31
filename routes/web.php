@@ -14,6 +14,8 @@ use App\Http\Controllers\Auth\UserEmailVerificationNotificationController;
 use App\Http\Controllers\Auth\UserEmailVerificationPromptController;
 use App\Http\Controllers\Auth\UserNewPasswordController;
 use App\Http\Controllers\Auth\UserVerifyEmailController;
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -44,7 +46,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth:web')->group(function () { // ['auth:web', 'verified'] para validar email
-    Route::get('/dashboard', function () {
+    Route::get('dashboard', function () {
         return Inertia::render('user/user-dashboard', [
             'user' => auth()->guard('web')->user(), // Passa o usuário logado para o frontend
         ]);
@@ -77,12 +79,12 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     // Rotas de Autenticação para o administrador
     // O middleware 'guest:admin' garante que só acessa se não estiver logado como admin
     Route::middleware('guest:admin')->group(function () { // Use guest:admin para que admins deslogados possam acessar
-        Route::get('/login', [AdminAuthenticatedSessionController::class, 'create'])->name('login'); // Rota para o formulário de login do admin
-        Route::post('/login', [AdminAuthenticatedSessionController::class, 'store']); // Processa o login admin     
+        Route::get('login', [AdminAuthenticatedSessionController::class, 'create'])->name('login'); // Rota para o formulário de login do admin
+        Route::post('login', [AdminAuthenticatedSessionController::class, 'store']); // Processa o login admin     
 
-        Route::get('/forgot-password', [AdminPasswordResetLinkController::class, 'create'])
+        Route::get('forgot-password', [AdminPasswordResetLinkController::class, 'create'])
             ->name('password.request');
-        Route::post('/forgot-password', [AdminPasswordResetLinkController::class, 'store'])
+        Route::post('forgot-password', [AdminPasswordResetLinkController::class, 'store'])
             ->name('password.email');
 
         Route::get('reset-password/{token}', [AdminNewPasswordController::class, 'create'])
@@ -92,15 +94,15 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     });
 
     Route::middleware('auth:admin')->group(function () {  // ['auth', 'verified'] para validar email
-    
-        Route::get('/dashboard', function () {
+        Route::get('dashboard', function () {
+            // dd('aqui');
             return Inertia::render('admin/admin-dashboard', [
                 'admin' => auth()->guard('admin')->user(), // Passa o admin logado
             ]);
         })->name('dashboard'); // Rota protegida para admins
         
-        Route::get('/register', [AdminRegisteredController::class, 'create'])->name('register');
-        Route::post('/register', [AdminRegisteredController::class, 'store']);
+        Route::get('register', [AdminRegisteredController::class, 'create'])->name('register');
+        Route::post('register', [AdminRegisteredController::class, 'store']);
 
         Route::get('verify-email', AdminEmailVerificationPromptController::class)
             ->name('verification.notice');
@@ -114,11 +116,16 @@ Route::prefix('/admin')->name('admin.')->group(function () {
             ->name('verification.send');
 
         // Outras rotas administrativas aqui...
+        Route::resources([
+            'banners' => BannerController::class
+        ]);
+
+        Route::resources([
+            'categories' => CategoryController::class
+        ]);
 
 
-
-
-        Route::post('/logout', [AdminAuthenticatedSessionController::class, 'destroy'])->name('logout'); // Rota para logout do admin
+        Route::post('logout', [AdminAuthenticatedSessionController::class, 'destroy'])->name('logout'); // Rota para logout do admin
     });
 
 });
