@@ -5,6 +5,7 @@ interface FileInputCustomizadoTSProps {
   id: string;
   labelText?: string; 
   multiple?: boolean;
+  tabIndex?: number;
   onFileSelect?: (file: File | null) => void;
 }
 
@@ -13,7 +14,8 @@ export default function InputImage({
     id, 
     labelText = 'Escolher Imagem', 
     onFileSelect,
-    multiple = false
+    multiple = false,
+    tabIndex,
 }: FileInputCustomizadoTSProps) {
   const [nomeArquivo, setNomeArquivo] = useState<string>('Nenhuma imagem selecionada');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -50,6 +52,7 @@ export default function InputImage({
         className="hidden"
         accept="image/*"
         onChange={handleFileChange}
+        tabIndex={tabIndex}
         multiple={multiple}
       />
 

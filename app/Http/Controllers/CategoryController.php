@@ -55,12 +55,12 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:190',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'order' => 'required'
+            'order' => 'required|integer|min:1|unique:categories,order',
         ]);
 
         $imagePath = null;
         if( $request->hasFile('image')){
-            $imagePath = Storage::disk('public')->putFile('images', $request->file('image'));
+            $imagePath = Storage::disk('public')->putFile('images/categories', $request->file('image'));
         }
 
         Category::create([
@@ -112,7 +112,7 @@ class CategoryController extends Controller
             if ($imagePath && Storage::disk('public')->exists($imagePath)) {
                 Storage::disk('public')->delete($imagePath);
             }
-            $imagePath = Storage::disk('public')->putFile('images', $request->file('image'));
+            $imagePath = Storage::disk('public')->putFile('images/categories', $request->file('image'));
         } 
 
         $category->update([
