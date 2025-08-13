@@ -2,6 +2,14 @@ import React, {useId} from 'react';
 import { Head, Link, router } from '@inertiajs/react';
 import { Admin } from '../../types/models'; // Importa a interface Admin
 import AdminSystemLayout from '@/layouts/admin-system-layout';
+import { BreadcrumbItem } from '@/types';
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Dashboard',
+        href: '/admin/dashboard',
+    },
+];
 
 // Define a interface para as props que o componente AdminDashboard recebe
 interface AdminDashboardProps {
@@ -10,12 +18,9 @@ interface AdminDashboardProps {
 
 function AdminDashboard({ admin }: AdminDashboardProps) {
     const patternId = useId();
-    const handleLogout = () => {
-        router.post(route('admin.logout')); // Rota de logout do admin
-    };
-
+    
     return (
-         <AdminSystemLayout>
+         <AdminSystemLayout breadcrumbs={breadcrumbs}>
           <Head title='Dashboard'/>
            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
                 <div className="grid auto-rows-min gap-4 md:grid-cols-3">

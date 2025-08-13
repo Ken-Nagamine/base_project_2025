@@ -73,5 +73,17 @@ igual banners...
      - show-category para show-category-dialog (modal)
 
 
-### Product
+### Product ->  (variations, variation_options, product_variants, variant_options)
 ** exemplo mais complexo.....
+
+- php artisan make:migration create_companies_table
+- php artisan make:migration create_brands_table
+- php artisan make:migration create_products_table
+- php artisan make:migration create_variations_table
+- php artisan make:migration create_variation_options_table
+- php artisan make:migration create_product_variants_table
+- php artisan make:migration create_variant_options_table (junção)
+
+- php artisan make:migration create_product_images_table 
+
+

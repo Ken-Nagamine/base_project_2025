@@ -22,6 +22,7 @@ import {
     LayoutGrid, 
     LogOut, 
     Settings,
+    Tag,
     ChevronRightIcon
 } from 'lucide-react';
 
@@ -30,11 +31,21 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Banners',
         href: '/admin/banners',
-        icon: LayoutGrid,
+        icon: LayoutGrid
     },
     {
-        title: 'Category',
+        title: 'Categories',
         href: '/admin/categories',
+        icon: Folder,
+    },
+    {
+        title: 'Brands',
+        href: '/admin/brands',
+        icon: Tag,
+    },
+    {
+        title: 'Products',
+        href: '/admin/products',
         icon: Folder,
     },
 ];

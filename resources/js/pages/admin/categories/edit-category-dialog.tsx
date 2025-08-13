@@ -123,9 +123,9 @@ export default function EditCategory({category}: EditCategoryFormProps){
                         e.preventDefault(); // Impede o fechamento ao pressionar ESC
                     }}
                 >
-                    <DialogTitle className="m-0 text-[17px] font-medium text-mauve12">Edit profile</DialogTitle>
+                    <DialogTitle className="m-0 text-[17px] font-medium text-mauve12">Edit Category</DialogTitle>
                     <DialogDescription className="mb-5 mt-2.5 text-[15px] leading-normal text-mauve11">
-                        Make changes to your profile here. Click save when you're done.
+                        Make changes to Category here. Click save when you're done.
                     </DialogDescription>
                     <form className="flex flex-col" onSubmit={handleSubmit}>
                         <div className="grid gap-6">
