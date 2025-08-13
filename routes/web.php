@@ -15,8 +15,11 @@ use App\Http\Controllers\Auth\UserEmailVerificationPromptController;
 use App\Http\Controllers\Auth\UserNewPasswordController;
 use App\Http\Controllers\Auth\UserVerifyEmailController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImageController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -91,11 +94,14 @@ Route::prefix('/admin')->name('admin.')->group(function () {
             ->name('password.reset');
         Route::post('reset-password', [AdminNewPasswordController::class, 'store'])
             ->name('password.store');
+
+        // USADO PARA CADASTRAR ADMIN SE RESETAR O BANCO
+        // Route::get('register', [AdminRegisteredController::class, 'create'])->name('register');
+        // Route::post('register', [AdminRegisteredController::class, 'store']);
     });
 
     Route::middleware('auth:admin')->group(function () {  // ['auth', 'verified'] para validar email
         Route::get('dashboard', function () {
-            // dd('aqui');
             return Inertia::render('admin/admin-dashboard', [
                 'admin' => auth()->guard('admin')->user(), // Passa o admin logado
             ]);
@@ -123,6 +129,18 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::resources([
             'categories' => CategoryController::class
         ]);
+
+        Route::resources([
+            'brands' => BrandController::class
+        ]);
+
+        Route::resources([
+            'products' => ProductController::class
+        ]);
+
+        Route::post('/products/{product}/images', [ProductImageController::class, 'store'])->name('products.images.store');
+        Route::delete('/products/{product}/images/{image}', [ProductImageController::class, 'destroy'])->name('products.images.delete');
+        Route::put('/products/{product}/images/reorder', [ProductImageController::class, 'reorder'])->name('products.images.reorder');
 
 
         Route::post('logout', [AdminAuthenticatedSessionController::class, 'destroy'])->name('logout'); // Rota para logout do admin
