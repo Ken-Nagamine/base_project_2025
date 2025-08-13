@@ -66,7 +66,7 @@ export interface BannerIndexProps {
     filters: Filters;
 }
 
-export default function Banner({initialBanners, filters}: BannerIndexProps) {
+export default function BannersPage({initialBanners, filters}: BannerIndexProps) {
     const { data, links, current_page, last_page, next_page_url, prev_page_url } = initialBanners;
 
     // Usamos um 'ref' para debounce, para não fazer uma requisição a cada digitação

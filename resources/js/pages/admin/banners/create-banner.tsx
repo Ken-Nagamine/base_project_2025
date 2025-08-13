@@ -166,7 +166,6 @@ export default function CreateBanner() {
                             <Input
                                 id="phrase_1"
                                 type="text"
-                                autoFocus
                                 tabIndex={3}
                                 autoComplete="phrase_1"
                                 value={data.phrase_1}

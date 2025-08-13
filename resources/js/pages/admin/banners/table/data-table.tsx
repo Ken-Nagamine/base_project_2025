@@ -62,8 +62,6 @@ export function DataTable<TData, TValue>({
         },
     });
 
-    console.log(paginationLinks)
-
     return (
         <div>
             {/* Campo de Busca */}
